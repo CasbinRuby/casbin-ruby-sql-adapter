@@ -62,6 +62,7 @@ module CasbinRubySqlAdapter
 
     private
 
+    # TODO: move to generator
     def migrate
       db.create_table? table_name do
         primary_key :id
