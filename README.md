@@ -12,7 +12,7 @@ gem 'casbin-ruby-sql-adapter'
 ## Simple Example
 
 ```ruby
-require 'casbin'
+require 'casbin-ruby'
 require 'casbin-ruby-sql-adapter'
 
 adapter = CasbinRubySqlAdapter::Adapter.new(db_url: 'sqlite:///test.db')
