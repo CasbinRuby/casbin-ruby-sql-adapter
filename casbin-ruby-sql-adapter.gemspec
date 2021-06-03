@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir.glob(File.join('spec', '**', '*.rb'))
   s.required_ruby_version = '>= 2.5.0'
 
-  s.add_dependency 'casbin-ruby'
+  s.add_dependency 'casbin-ruby', '>= 1.0.7'
   s.add_dependency 'sequel', '>= 5.42'
 
   s.add_development_dependency 'rspec', '~> 3.10'
