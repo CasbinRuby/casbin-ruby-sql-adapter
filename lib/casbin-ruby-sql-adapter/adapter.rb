@@ -49,7 +49,7 @@ module CasbinRubySqlAdapter
 
     # removes policy rules that match the filter from the storage.
     # This is part of the Auto-Save feature.
-    def remove_filtered_policy(sec, ptype, field_index, *field_values)
+    def remove_filtered_policy(_sec, _ptype, _field_index, *_field_values)
       true
       # return false unless field_index >=0 && field_index <= 5
       #

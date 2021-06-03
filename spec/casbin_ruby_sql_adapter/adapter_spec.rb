@@ -5,6 +5,11 @@ require 'casbin-ruby'
 require 'casbin-ruby-sql-adapter/adapter'
 
 describe CasbinRubySqlAdapter::Adapter do
+  let(:db_url) { "sqlite://#{@db}" }
+  let(:path) { File.expand_path('rbac_model.conf', __dir__) }
+  let(:adapter) { described_class.new(db_url: db_url) }
+  let(:enf) { Casbin::Enforcer.new(path, adapter) }
+
   before do
     @db = 'test.db'
     table_name = :casbin_rule
@@ -20,11 +25,6 @@ describe CasbinRubySqlAdapter::Adapter do
   after do
     Sequel.connect("sqlite://#{@db}").drop_table?(:casbin_rule)
   end
-
-  let(:db_url) { "sqlite://#{@db}" }
-  let(:path) { File.expand_path('rbac_model.conf', __dir__) }
-  let(:adapter) { described_class.new(db_url: db_url) }
-  let(:enf) { Casbin::Enforcer.new(path, adapter) }
 
   it 'enforcer_basic' do
     expect(enf.enforce('alice', 'data1', 'read')).to be_truthy
