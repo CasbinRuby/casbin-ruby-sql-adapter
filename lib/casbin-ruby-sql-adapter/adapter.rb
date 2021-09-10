@@ -42,6 +42,11 @@ module CasbinRubySqlAdapter
       db[table_name].insert(policy_line(ptype, rule))
     end
 
+    def add_policies(_sec, ptype, rules)
+      list = rules.map { |rule| policy_line(ptype, rule) }
+      db[table_name].multi_insert(list)
+    end
+
     # removes a policy rule from the storage.
     def remove_policy(_sec, ptype, rule)
       db[table_name].where(policy_line(ptype, rule)).delete
