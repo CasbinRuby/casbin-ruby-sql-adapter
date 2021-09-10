@@ -35,13 +35,19 @@ describe CasbinRubySqlAdapter::Adapter do
     expect(enf.enforce('bogus', 'data2', 'write')).to be_falsey
   end
 
-  it '#add_policies' do
+  it '#add_permission_for_user' do
     expect(enf.enforce('eve', 'data3', 'read')).to be_falsey
     enf.add_permission_for_user('eve', 'data3', 'read')
     expect(enf.enforce('eve', 'data3', 'read')).to be_truthy
   end
 
   it '#add_policy' do
+    expect(enf.enforce('eve', 'data3', 'read')).to be_falsey
+    enf.add_policy(%w[eve data3 read])
+    expect(enf.enforce('eve', 'data3', 'read')).to be_truthy
+  end
+
+  it '#add_policies' do
     expect(enf.enforce('eve', 'data3', 'read')).to be_falsey
     enf.add_policies([%w[eve data3 read], %w[eve data4 read]])
     expect(enf.enforce('eve', 'data3', 'read')).to be_truthy
